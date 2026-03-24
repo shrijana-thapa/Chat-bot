@@ -5,12 +5,14 @@ import { Header } from '../../components/Header';
 import dayjs from 'dayjs';
 import { formatMoney } from '../../utils/money';
 
-export function OrderSPage({ cart }) {
+export function OrdersPage({ cart }) {
   const [orders, setOrders] = useState([]);
   useEffect(() => {
-    axios.get('/api/orders? expand=products').then((response) => {
+    const fetchOrders = async () => {
+      const response = await axios.get('/api/orders?expand=products');
       setOrders(response.data);
-    });
+    };
+    fetchOrders();
   }, []);
 
   return (

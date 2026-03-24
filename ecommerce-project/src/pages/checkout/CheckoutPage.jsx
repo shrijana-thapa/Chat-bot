@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import './checkout-header.css';
 import './CheckoutPage.css';
 import { OrderSummary } from './orderSummary';
+import { PaymentSummary } from './paymentSummary';
 
 export function CheckoutPage({ cart }) {
   const [deliveryOptions, setDeliveryOption] = useState([]);
@@ -51,7 +52,7 @@ export function CheckoutPage({ cart }) {
 
         <div className="checkout-grid">
           <OrderSummary deliveryOptions={deliveryOptions} cart={cart} />
-          <paymentSummary paymentSummary={paymentSummary} />
+          <PaymentSummary paymentSummary={paymentSummary} />
         </div>
       </div>
     </>

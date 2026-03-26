@@ -4,10 +4,12 @@ import './checkout-header.css';
 import './CheckoutPage.css';
 import { OrderSummary } from './orderSummary';
 import { PaymentSummary } from './paymentSummary';
+import { useNavigate } from 'react-router';
 
 export function CheckoutPage({ cart, loadCart }) {
   const [deliveryOptions, setDeliveryOption] = useState([]);
   const [paymentSummary, setPaymentSummary] = useState(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchCheckoutData = async () => {
@@ -20,6 +22,10 @@ export function CheckoutPage({ cart, loadCart }) {
     };
     fetchCheckoutData();
   }, [cart]);
+
+  const goToForm = () => {
+    navigate('form');
+  };
   return (
     <>
       <title>Checkout</title>
@@ -44,6 +50,7 @@ export function CheckoutPage({ cart, loadCart }) {
           <div className="checkout-header-right-section">
             <img src="images/icons/checkout-lock-icon.png" />
           </div>
+          <button onClick={goToForm}>Form</button>
         </div>
       </div>
 

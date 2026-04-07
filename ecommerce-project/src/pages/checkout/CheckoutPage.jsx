@@ -6,7 +6,7 @@ import { OrderSummary } from './orderSummary';
 import { PaymentSummary } from './paymentSummary';
 import { useNavigate } from 'react-router';
 
-export function CheckoutPage({ cart, loadCart }) {
+export function CheckoutPage({ cart }) {
   const [deliveryOptions, setDeliveryOption] = useState([]);
   const [paymentSummary, setPaymentSummary] = useState(null);
   const navigate = useNavigate();
@@ -58,12 +58,8 @@ export function CheckoutPage({ cart, loadCart }) {
         <div className="page-title">Review your order</div>
 
         <div className="checkout-grid">
-          <OrderSummary
-            deliveryOptions={deliveryOptions}
-            cart={cart}
-            loadCart={loadCart}
-          />
-          <PaymentSummary paymentSummary={paymentSummary} loadCart={loadCart} />
+          <OrderSummary deliveryOptions={deliveryOptions} cart={cart} />
+          <PaymentSummary paymentSummary={paymentSummary} />
         </div>
       </div>
     </>

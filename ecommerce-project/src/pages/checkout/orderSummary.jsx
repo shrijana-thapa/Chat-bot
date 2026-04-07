@@ -1,9 +1,10 @@
 import dayjs from 'dayjs';
 import { formatMoney } from '../../utils/money';
 import { DeliveryOption } from './deliveryOption';
-import axios from 'axios';
+import { useDeleteCart } from '../../hooks/useDeleteCart';
 
-export function OrderSummary({ deliveryOptions, cart, loadCart }) {
+export function OrderSummary({ deliveryOptions, cart }) {
+  const { mutate: deleteCart, isPending } = useDeleteCart();
   return (
     <div className="order-summary">
       {deliveryOptions.length > 0 &&
@@ -13,9 +14,8 @@ export function OrderSummary({ deliveryOptions, cart, loadCart }) {
               return deliveryOption.id === cartItem.deliveryOptionId;
             },
           );
-          const Delete = async () => {
-            await axios.delete(`/api/cart-items/${cartItem.productId}`);
-            await loadCart();
+          const handleDeleteCart = () => {
+            deleteCart(cartItem.productId);
           };
           return (
             <div key={cartItem.productId} className="cart-item-container">
@@ -45,10 +45,10 @@ export function OrderSummary({ deliveryOptions, cart, loadCart }) {
                       Update
                     </span>
                     <span
-                      onClick={Delete}
+                      onClick={handleDeleteCart}
                       className="delete-quantity-link link-primary"
                     >
-                      Delete
+                      {isPending ? 'Deleting...' : 'Delete'}
                     </span>
                   </div>
                 </div>
@@ -56,7 +56,6 @@ export function OrderSummary({ deliveryOptions, cart, loadCart }) {
                 <DeliveryOption
                   deliveryOptions={deliveryOptions}
                   cartItem={cartItem}
-                  loadCart={loadCart}
                 />
               </div>
             </div>

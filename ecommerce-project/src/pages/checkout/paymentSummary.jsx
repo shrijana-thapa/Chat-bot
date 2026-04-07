@@ -1,12 +1,12 @@
-import axios from 'axios';
 import { useNavigate } from 'react-router';
 import { formatMoney } from '../../utils/money';
+import { useAddOrder } from '../../hooks/useAddOrder';
 
-export function PaymentSummary({ paymentSummary, loadCart }) {
+export function PaymentSummary({ paymentSummary }) {
+  const { mutate: addOrder, isPending } = useAddOrder();
   const navigate = useNavigate();
-  const placeOrder = async () => {
-    await axios.post('/api/orders');
-    await loadCart();
+  const placeOrder = () => {
+    addOrder();
     navigate('/orders');
   };
   return (
@@ -53,7 +53,7 @@ export function PaymentSummary({ paymentSummary, loadCart }) {
             onClick={placeOrder}
             className="place-order-button button-primary"
           >
-            Place your order
+            {isPending ? 'Placing Order...' : 'Place Order'}
           </button>
         </>
       )}

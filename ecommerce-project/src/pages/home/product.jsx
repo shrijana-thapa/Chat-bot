@@ -1,17 +1,22 @@
-import axios from 'axios';
 import { useState } from 'react';
 import { formatMoney } from '../../utils/money';
+import { useAddToCart } from '../../hooks/useAddToCart';
 
-export function Product({ product, loadCart }) {
+export function Product({ product }) {
   const [quantity, setQuantity] = useState(1);
-  const addToCart = async () => {
-    await axios.post('/api/cart-items', {
-      productId: product.id,
-      quantity,
-    });
-    await loadCart();
+  const [added, setAdded] = useState(false);
+  const { mutate: addToCart, isPending } = useAddToCart();
+  const handleAddToCart = () => {
+    addToCart(
+      { productId: product.id, quantity },
+      {
+        onSuccess: () => {
+          setAdded(true);
+          setTimeout(() => setAdded(false), 1000);
+        },
+      },
+    );
   };
-
   const selectQuantity = (event) => {
     const selectedQuantity = Number(event.target.value);
     setQuantity(selectedQuantity);
@@ -53,14 +58,18 @@ export function Product({ product, loadCart }) {
       </div>
 
       <div className="product-spacer"></div>
+      {added && (
+        <div className="added-to-cart">
+          <img src="images/icons/checkmark.png" />
+          Added
+        </div>
+      )}
 
-      <div className="added-to-cart">
-        <img src="images/icons/checkmark.png" />
-        Added
-      </div>
-
-      <button onClick={addToCart} className="add-to-cart-button button-primary">
-        Add to Cart
+      <button
+        onClick={handleAddToCart}
+        className="add-to-cart-button button-primary"
+      >
+        {isPending ? 'Adding...' : 'Add to Cart'}
       </button>
     </div>
   );

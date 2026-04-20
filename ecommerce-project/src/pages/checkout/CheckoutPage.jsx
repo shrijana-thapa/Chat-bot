@@ -1,14 +1,39 @@
 import axios from 'axios';
-import { useState, useEffect } from 'react';
+import { useReducer, useEffect, useContext } from 'react';
 import './checkout-header.css';
 import './CheckoutPage.css';
 import { OrderSummary } from './orderSummary';
 import { PaymentSummary } from './paymentSummary';
 import { useNavigate } from 'react-router';
+import { CartContext } from '../../context/CartContext';
 
-export function CheckoutPage({ cart }) {
-  const [deliveryOptions, setDeliveryOption] = useState([]);
-  const [paymentSummary, setPaymentSummary] = useState(null);
+const initialState = {
+  deliveryOptions: [],
+  paymentSummary: null,
+};
+
+function checkoutReducer(state, action) {
+  switch (action.type) {
+    case 'SET_DELIVERY_OPTIONS': {
+      return {
+        ...state,
+        deliveryOptions: action.payload,
+      };
+    }
+    case 'SET_PAYMENT_SUMMARY': {
+      return {
+        ...state,
+        paymentSummary: action.payload,
+      };
+    }
+    default:
+      return state;
+  }
+}
+
+export function CheckoutPage() {
+  const [state, dispatch] = useReducer(checkoutReducer, initialState);
+  const cart = useContext(CartContext);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -16,9 +41,9 @@ export function CheckoutPage({ cart }) {
       let response = await axios.get(
         '/api/delivery-options?expand=estimatedDeliveryTime',
       );
-      setDeliveryOption(response.data);
+      dispatch({ type: 'SET_DELIVERY_OPTIONS', payload: response.data });
       response = await axios.get('/api/payment-summary');
-      setPaymentSummary(response.data);
+      dispatch({ type: 'SET_PAYMENT_SUMMARY', payload: response.data });
     };
     fetchCheckoutData();
   }, [cart]);
@@ -58,8 +83,8 @@ export function CheckoutPage({ cart }) {
         <div className="page-title">Review your order</div>
 
         <div className="checkout-grid">
-          <OrderSummary deliveryOptions={deliveryOptions} cart={cart} />
-          <PaymentSummary paymentSummary={paymentSummary} />
+          <OrderSummary deliveryOptions={state.deliveryOptions} cart={cart} />
+          <PaymentSummary paymentSummary={state.paymentSummary} />
         </div>
       </div>
     </>

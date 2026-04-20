@@ -1,6 +1,13 @@
 import { useForm } from 'react-hook-form';
+import { useRef, useEffect } from 'react';
 import './form.css';
+
 export function Form() {
+  const nameRef = useRef(null);
+  useEffect(() => {
+    nameRef.current.focus();
+  }, []);
+
   const {
     register,
     handleSubmit,
@@ -8,16 +15,24 @@ export function Form() {
     reset,
     watch,
   } = useForm();
+
   const submit = (data) => {
     console.log(data);
     reset();
   };
+
   const delivery = watch('delivery');
   const paymentMethod = watch('paymentMethod');
+
   return (
     <form onSubmit={handleSubmit(submit)}>
       <label htmlFor="name">Name:</label>
-      <input type="text" id="name" {...register('name', { required: true })} />
+      <input
+        type="text"
+        id="name"
+        ref={nameRef}
+        {...register('name', { required: true })}
+      />
       {errors.name && <p>Name is required</p>}
       <label htmlFor="email">Email:</label>
       <input

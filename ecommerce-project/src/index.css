@@ -105,3 +105,6 @@ select:focus,
 input:focus {
   outline: 2px solid rgb(25, 135, 84);
 }
+@tailwind base;
+@tailwind components;
+@tailwind utilities;

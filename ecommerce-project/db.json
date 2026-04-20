@@ -1,0 +1,106 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "name": "Hari",
+      "email": "hari@gmail.com",
+      "age": 30
+    },
+    {
+      "id": 2,
+      "name": "Gita",
+      "email": "gita@gmail.com",
+      "age": 28
+    },
+    {
+      "id": 3,
+      "name": "Sita",
+      "email": "sita@gmail.com",
+      "age": 25
+    },
+    {
+      "id": 4,
+      "name": "Ramesh",
+      "email": "ramesh@gmail.com",
+      "age": 32
+    },
+    {
+      "id": 5,
+      "name": "Anita",
+      "email": "anita@gmail.com",
+      "age": 27
+    },
+    {
+      "id": 6,
+      "name": "Suresh",
+      "email": "suresh@gmail.com",
+      "age": 35
+    },
+    {
+      "id": 7,
+      "name": "Nabin",
+      "email": "nabin@gmail.com",
+      "age": 29
+    },
+    {
+      "id": 8,
+      "name": "Kritika",
+      "email": "kritika@gmail.com",
+      "age": 24
+    },
+    {
+      "id": 9,
+      "name": "Dipak",
+      "email": "dipak@gmail.com",
+      "age": 31
+    },
+    {
+      "id": 10,
+      "name": "Manisha",
+      "email": "manisha@gmail.com",
+      "age": 26
+    },
+    {
+      "id": 11,
+      "name": "Prakash",
+      "email": "prakash@gmail.com",
+      "age": 33
+    },
+    {
+      "id": 12,
+      "name": "Sunita",
+      "email": "sunita@gmail.com",
+      "age": 22
+    },
+    {
+      "id": 13,
+      "name": "Bikash",
+      "email": "bikash@gmail.com",
+      "age": 30
+    },
+    {
+      "id": 14,
+      "name": "Rita",
+      "email": "rita@gmail.com",
+      "age": 27
+    },
+    {
+      "id": 15,
+      "name": "Mohan",
+      "email": "mohan@gmail.com",
+      "age": 36
+    },
+    {
+      "id": 16,
+      "name": "Pooja",
+      "email": "pooja@gmail.com",
+      "age": 23
+    },
+    {
+      "id": 17,
+      "name": "Kamal",
+      "email": "kamal@gmail.com",
+      "age": 34
+    }
+  ]
+}

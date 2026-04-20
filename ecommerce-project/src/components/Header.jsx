@@ -1,7 +1,10 @@
 import { Link } from 'react-router';
 import './header.css';
+import { useContext } from 'react';
+import { CartContext } from '../context/CartContext';
 
-export function Header({ cart }) {
+export function Header() {
+  const cart = useContext(CartContext);
   let totalQuantity = 0;
 
   cart.forEach((cartItem) => {
@@ -12,7 +15,7 @@ export function Header({ cart }) {
     <div className="header">
       <div className="left-section">
         <Link to="/" className="header-link">
-          <img className="logo" src="images/logo-white.png" />
+          <h1>Ecommerce </h1>
           <img className="mobile-logo" src="images/mobile-logo-white.png" />
         </Link>
       </div>

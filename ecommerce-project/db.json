@@ -1,14 +1,8 @@
 {
   "users": [
     {
-      "id": 1,
-      "name": "Hari",
-      "email": "hari@gmail.com",
-      "age": 30
-    },
-    {
       "id": 2,
-      "name": "Gita",
+      "name": "MAmta",
       "email": "gita@gmail.com",
       "age": 28
     },

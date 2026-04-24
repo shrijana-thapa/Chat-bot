@@ -1,7 +1,7 @@
 import { User } from '../types/user';
 
 export const updateUserApi= async({id,data}: {id: number, data: User}) => {
-    const res= await fetch(`http://Localhost:3000/users/${id}`, {
+    const res= await fetch(`http://localhost:3000/users/${id}`, {
         method: 'PATCH',
         headers: {
             'Content-Type': 'application/json'

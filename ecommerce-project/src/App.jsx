@@ -8,7 +8,7 @@ import { Form } from './components/form/form';
 // import { useCart } from './hooks/hooks';
 import UserDashboard from './pages/table/Dashboard';
 import { CartContext } from './context/CartContext';
-import UserForm from './pages/table/UserForm';
+import { UserForm } from './pages/table/form';
 
 function App() {
   // const { data: cart = [], isLoading, isError } = useCart();

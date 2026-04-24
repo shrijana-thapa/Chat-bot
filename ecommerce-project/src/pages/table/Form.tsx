@@ -1,7 +1,7 @@
 import { useForm } from 'react-hook-form';
 import { User } from '../../types/user';
 import { useUpdateUser } from '../../hooks/useUpdateUser';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useAddUser } from '../../hooks/useAddUser';
 import { useFetchUserById } from '../../hooks/useFetchUserById';
 import { useEffect } from 'react';
@@ -15,11 +15,13 @@ export const UserForm = () => {
     reset,
     formState: { errors },
   } = useForm<User>();
+  const navigate = useNavigate();
 
   const isEdit = Boolean(id);
 
-  const { data: user } = useFetchUserById({ id: id ? Number(id) : undefined });
+  const { data: user } = useFetchUserById(id ? Number(id) : undefined);
   useEffect(() => {
+    console.log('user:', user);
     if (user) {
       reset(user);
     }
@@ -30,12 +32,28 @@ export const UserForm = () => {
 
   const onSubmit = (data: User) => {
     if (isEdit && id) {
-      updateMutation.mutate({ id: Number(id), data });
+      updateMutation.mutate(
+        { id: Number(id), data },
+        {
+          onSuccess: () => {
+            reset();
+            navigate('/users');
+          },
+        },
+      );
     } else {
-      addUserMutation.mutate(data);
+      addUserMutation.mutate(data, {
+        onSuccess: () => {
+          reset();
+          navigate('/users');
+        },
+      });
     }
-    reset();
   };
+
+  if (isEdit && !user) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <div className="max-w-md mx-auto mt-6 p-4 border rounded-lg bg-gray-100">
@@ -87,7 +105,7 @@ export const UserForm = () => {
 
           <button
             type="button"
-            onClick={() => reset()}
+            onClick={() => navigate('/users')}
             className="bg-gray-500 text-white px-3 py-1 rounded"
           >
             Cancel

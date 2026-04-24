@@ -8,8 +8,8 @@
     },
     {
       "id": 3,
-      "name": "Sita",
-      "email": "sita@gmail.com",
+      "name": "Mamta",
+      "email": "mamta@gamil.com",
       "age": 25
     },
     {
@@ -95,6 +95,18 @@
       "name": "Kamal",
       "email": "kamal@gmail.com",
       "age": 34
+    },
+    {
+      "name": "korean",
+      "email": "korean@gamil.com",
+      "age": 34,
+      "id": 18
+    },
+    {
+      "name": "Sakura",
+      "email": "sakuragamil.com",
+      "age": 56,
+      "id": 19
     }
   ]
 }

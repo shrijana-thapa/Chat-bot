@@ -24,11 +24,13 @@ const UserDashboard = () => {
   if (isError) return <div>Error occurred while fetching users.</div>;
 
   const handleEdit = (user: User) => {
+    console.log('Edit user');
     navigate(`/users/edit/${user.id}`);
   };
 
   const handleDelete = (userId: number) => {
     deleteMutation.mutate(userId);
+    console.log('Delete user with ID:', userId);
   };
 
   return (

@@ -1,20 +1,8 @@
 {
   "users": [
     {
-      "id": 2,
-      "name": "MAmta",
-      "email": "gita@gmail.com",
-      "age": 28
-    },
-    {
-      "id": 3,
-      "name": "Mamta",
-      "email": "mamta@gamil.com",
-      "age": 25
-    },
-    {
       "id": 4,
-      "name": "Ramesh",
+      "name": "Roshni",
       "email": "ramesh@gmail.com",
       "age": 32
     },

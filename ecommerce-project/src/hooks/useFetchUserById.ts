@@ -2,9 +2,8 @@ import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 
 const FetchUserById = async (id:number) => {
-  return await axios
-    .get(`http://localhost:3000/users/${id}`)
-    .then((res) => res.data);
+  const res = await axios.get(`http://localhost:3000/users/${id}`);
+  return res.data;
 };
 
 export const useFetchUserById = (id?: number) => {

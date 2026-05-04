@@ -22,10 +22,10 @@ export const UserForm = () => {
   const { data: user } = useFetchUserById(id ? Number(id) : undefined);
   useEffect(() => {
     console.log('user:', user);
-    if (user) {
+    if (user && isEdit) {
       reset(user);
     }
-  }, [user, reset]);
+  }, [user, reset, isEdit]);
 
   const updateMutation = useUpdateUser();
   const addUserMutation = useAddUser();
@@ -52,7 +52,7 @@ export const UserForm = () => {
   };
 
   if (isEdit && !user) {
-    return <div>Loading...</div>;
+    return <div>Loading user data...</div>;
   }
 
   return (

@@ -5,9 +5,12 @@ import { useDeleteUser } from '../../hooks/useDeleteUser';
 import { User } from '../../types/user';
 import { fetchUsers } from '../../userApi/usersApi';
 import { Table } from './Table';
+import { useCallback, useState } from 'react';
 
 const UserDashboard = () => {
+  console.log('🔴 UserDashboard re-rendered');
   const deleteMutation = useDeleteUser();
+  const mutate = deleteMutation.mutate;
 
   const {
     data = [],
@@ -19,23 +22,33 @@ const UserDashboard = () => {
   });
 
   const navigate = useNavigate();
+  const [forceRender, setForceRender] = useState(0);
+
+  const handleEdit = useCallback(
+    (user: User) => {
+      console.log('Edit user');
+      navigate(`/users/edit/${user.id}`);
+    },
+    [navigate],
+  );
+
+  const handleDelete = useCallback(
+    (userId: number) => {
+      mutate(userId);
+      console.log('Delete user with ID:', userId);
+    },
+    [mutate],
+  );
 
   if (isLoading) return <div>Loading...</div>;
   if (isError) return <div>Error occurred while fetching users.</div>;
 
-  const handleEdit = (user: User) => {
-    console.log('Edit user');
-    navigate(`/users/edit/${user.id}`);
-  };
-
-  const handleDelete = (userId: number) => {
-    deleteMutation.mutate(userId);
-    console.log('Delete user with ID:', userId);
-  };
-
   return (
     <>
       <div className="p-6 max-w-5xl mx-auto">
+        <button onClick={() => setForceRender((prev) => prev + 1)}>
+          Force Re-render
+        </button>
         {/* Add User Button */}
         <button
           onClick={() => {

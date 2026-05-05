@@ -7,12 +7,17 @@ import {
   SortingState,
   useReactTable,
 } from '@tanstack/react-table';
-import { useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import { getColumns } from './columns';
 import { Props } from '../../types/table';
 
-export const Table = ({ data, onEdit, onDelete }: Props) => {
-  const columns = getColumns(onEdit, onDelete);
+export const Table = React.memo(({ data, onEdit, onDelete }: Props) => {
+  console.log('🔴 Table component re-rendered');
+
+  const columns = useMemo(
+    () => getColumns(onEdit, onDelete),
+    [onEdit, onDelete],
+  );
   const [sorting, setSorting] = useState<SortingState>([]);
   const [globalFilter, setGlobalFilter] = useState('');
   const table = useReactTable({
@@ -161,4 +166,4 @@ export const Table = ({ data, onEdit, onDelete }: Props) => {
       </div>
     </>
   );
-};
+});
